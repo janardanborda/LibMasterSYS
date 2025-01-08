@@ -34,3 +34,26 @@ dependencies {
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core
 }
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            groupId = 'com.github.janardanborda'
+            artifactId = 'LibMasterSYS'
+            version = '1.0.5'
+        }
+    }
+}
+
+subprojects {
+    publishing {
+        publications {
+            mavenJava {
+                from components.release
+                afterEvaluate {
+                    artifactId = jar.archiveBaseName
+                }
+            }
+        }
+    }
+}
